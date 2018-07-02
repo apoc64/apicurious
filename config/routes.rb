@@ -1,3 +1,6 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+
+  # get 'auth/github', as: 'auth_path'
+  root to: 'home#index'
+  # session new as root?
 end
