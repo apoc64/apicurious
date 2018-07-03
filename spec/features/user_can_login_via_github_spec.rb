@@ -6,9 +6,9 @@ describe 'user visits root' do
     expect(page).to have_link('Login with Github')
   end
 
-  # it 'can fail to login' do
-  #   visit '/auth/github/callback'
-  #
-  #   expect(page).to have_content("Failed to login via github")
-  # end
+  it 'can fail to login' do
+    visit '/auth/github/callback'
+
+    expect(current_path).to eq('/')
+  end
 end

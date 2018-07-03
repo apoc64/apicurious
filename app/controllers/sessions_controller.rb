@@ -1,17 +1,13 @@
 class SessionsController < ApplicationController
   def create
-    # binding.pry
-    if params[:provider] == 'github'
-      # auth_hash
-      
-    else
-      flash[:notice] = "Please login with GitHub"
+    user = User.from_omniauth(request.env["omniauth.auth"])
+    if user.valid?
+      session[:user_id] = user.id
+      redirect_to user_path(user)
     end
   end
 
-  # private
-  #
-  # def auth_hash
-  #   binding.pry
-  # end
+  def destroy
+  end
+
 end
