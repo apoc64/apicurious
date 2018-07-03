@@ -17,7 +17,7 @@ describe 'visitor visits root' do
     visit '/'
     click_link "Login with Github"
 
-    expect(page).to have_content("Welcome")
+    expect(page).to have_content("Welcome apoc64")
   end
 
   def stub_omniauth
@@ -25,10 +25,10 @@ describe 'visitor visits root' do
     OmniAuth.config.mock_auth[:github] = OmniAuth::AuthHash.new({
       provider: 'github',
       info: {
-        nickname: 'bob'
+        nickname: 'apoc64'
       },
       credentials: {
-        token: 'abc123'
+        token: Rails.application.credentials.github[:test_token]
       }
     })
   end
