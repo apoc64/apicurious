@@ -1,1 +1,7 @@
 <h3>Welcome <%= current_user.username %></h3>
+
+<ul>
+<% @repos.each do |repo| %>
+  <li><%= repo["name"] %></li>
+<% end %>
+</ul>
