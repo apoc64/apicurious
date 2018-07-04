@@ -8,6 +8,7 @@
 .profile-pic {
   grid-column: 1/2;
   grid-row: 1/4;
+  padding: 5px;
 }
 .profile-pic img {
   width: 95%;
@@ -22,29 +23,35 @@
   grid-column: 1/2;
   grid-row: 5/6;
 }
+.profile-bio2 .btn {
+  width: 95%;
+}
 
 .profile-tabs {
   grid-column: 2/4;
   grid-row: 1/2;
   display: flex;
   justify-content: space-between;
+  padding: 10px;
 }
 
 .profile-repos-title {
   grid-column: 2/3;
   grid-row: 2/3;
+  padding-left: 10px
 }
 
 .profile-repos-customize {
   grid-column: 3/4;
   grid-row: 2/3;
+  padding-right: 10px;
 }
 .profile-repos-customize p {
   text-align: right;
 }
 
 .profile-repo {
-  padding: 5px;
+  padding: 7px;
 }
 .profile-repo .card-panel {
   height: 100%;
