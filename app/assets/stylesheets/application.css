@@ -2,7 +2,7 @@
   margin-top: 30px;
   display: grid;
   grid-template-columns: 25% 37% 37%;
-  grid-template-rows: 60px 30px 170px 170px 170px 170px;
+  grid-template-rows: 60px 30px 170px 170px 170px 300px;
 }
 
 .profile-pic {
@@ -32,11 +32,11 @@
   grid-row: 1/2;
   width: 100%;
 }
-.profile-tabs .tab a {
+.profile-tabs .tab {
   text-overflow: clip;
   text-transform: none;
 }
-.profile-tabs .tab a strong {
+.profile-tabs .tab strong {
   padding: 2px;
   border-radius: 3px;
 }
@@ -64,4 +64,10 @@
 }
 .profile-repo .card-panel h6 {
   margin-top: 0;
+}
+
+.repo-index {
+  display: none;
+  grid-column: 2/4;
+  grid-row: 2/7;
 }

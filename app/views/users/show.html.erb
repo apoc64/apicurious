@@ -14,22 +14,22 @@
   </div>
   <div class="profile-tabs row">
     <ul class="tabs">
-      <li class="tab col s2"><a href="#" class="active black-text">Overview</a></li>
-      <li class="tab col s3"><a href="#" class="black-text">Repositories <strong class="grey lighten-2"><%= @repos.count %></strong></a></li>
-      <li class="tab col s2"><a href="#" class="black-text">Stars</a></li>
-      <li class="tab col s2"><a href="#" class="black-text">Followers</a></li>
-      <li class="tab col s2"><a href="#" class="black-text">Following</a></li>
+      <li class="tab col s2" id="overview"><a href="#" class="active black-text" id=-"overview">Overview</a></li>
+      <li class="tab col s3" id="repos"><a href="#" class="black-text">Repositories <strong class="grey lighten-2"><%= @repos.count %></strong></a></li>
+      <li class="tab col s2" id="stars"><a href="#" class="black-text">Stars</a></li>
+      <li class="tab col s2" id="followers"><a href="#" class="black-text">Followers</a></li>
+      <li class="tab col s2" id="following"><a href="#" class="black-text">Following</a></li>
     </ul>
   </div>
-  <div class="profile-repos-title">
+  <div class="profile-repos-title main-display overview">
     <p>Pinned repositories</p>
   </div>
-  <div class="profile-repos-customize">
+  <div class="profile-repos-customize main-display overview">
     <p><a href="#" class="black-text">Customize your pinned repositories</a></p>
   </div>
 
   <% @repos[0..5].each do |repo| %>
-    <div class="profile-repo">
+    <div class="profile-repo main-display overview">
       <div class="card-panel">
         <h6 class="blue-text"><strong><%= repo["name"] %></strong></h6>
         <p><%= truncate(repo["description"], length: 80) %></p>
@@ -38,8 +38,48 @@
     </div>
   <% end %>
 
+<!-- hidden fields -->
+  <div class="repo-index main-display">
+    <ul>
+    <% @repos.each do |repo| %>
+      <li><%= repo["name"] %></li>
+    <% end %>
+    </ul>
+  </div>
+
 </div>
+<!-- end of grid -->
+
 <script>
   const tabBar = document.querySelector('.tabs')
   M.Tabs.init(tabBar, {});
+
+
+  const tabs = document.querySelectorAll('.tab')
+  tabs.forEach(tab => {
+    tab.addEventListener('click', function() {
+      // console.log(this.id);
+      // if not active?
+      var repos = document.querySelectorAll('.main-display')
+      repos.forEach(repo => {
+        repo.style.display = 'none'
+      })
+      switch (this.id) {
+        case 'overview':
+          const overs = document.querySelectorAll('.overview')
+          overs.forEach(over => {
+            over.style.display = 'inherit'
+          })
+          break;
+        case 'repos':
+          const repoIndex = document.querySelector('.repo-index')
+          repoIndex.style.display = 'block'
+          break;
+        default:
+          console.log("default tab");
+      }
+    })
+  })
+
+
 </script>
