@@ -2,7 +2,7 @@
   margin-top: 30px;
   display: grid;
   grid-template-columns: 25% 37% 37%;
-  grid-template-rows: 30px 30px 170px 170px 170px 170px;
+  grid-template-rows: 60px 30px 170px 170px 170px 170px;
 }
 
 .profile-pic {
@@ -30,9 +30,15 @@
 .profile-tabs {
   grid-column: 2/4;
   grid-row: 1/2;
-  display: flex;
-  justify-content: space-between;
-  padding: 10px;
+  width: 100%;
+}
+.profile-tabs .tab a {
+  text-overflow: clip;
+  text-transform: none;
+}
+.profile-tabs .tab a strong {
+  padding: 2px;
+  border-radius: 3px;
 }
 
 .profile-repos-title {

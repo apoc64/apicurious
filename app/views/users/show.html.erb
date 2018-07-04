@@ -12,18 +12,20 @@
     <p><%= @profile["location"] %></p>
     <a href="mailto:<%= @profile["email"] %>"><%= @profile["email"] %></a>
   </div>
-  <div class="profile-tabs">
-    <a href="#">Overview</a>
-    <a href="#">Repositories <%= @repos.count %></a>
-    <a href="#">Stars</a>
-    <a href="#">Followers</a>
-    <a href="#">Following</a>
+  <div class="profile-tabs row">
+    <ul class="tabs">
+      <li class="tab col s2"><a href="#" class="active black-text">Overview</a></li>
+      <li class="tab col s3"><a href="#" class="black-text">Repositories <strong class="grey lighten-2"><%= @repos.count %></strong></a></li>
+      <li class="tab col s2"><a href="#" class="black-text">Stars</a></li>
+      <li class="tab col s2"><a href="#" class="black-text">Followers</a></li>
+      <li class="tab col s2"><a href="#" class="black-text">Following</a></li>
+    </ul>
   </div>
   <div class="profile-repos-title">
     <p>Pinned repositories</p>
   </div>
   <div class="profile-repos-customize">
-    <p><a href="#">Customize your pinned repositories</a></p>
+    <p><a href="#" class="black-text">Customize your pinned repositories</a></p>
   </div>
 
   <% @repos[0..5].each do |repo| %>
@@ -37,3 +39,7 @@
   <% end %>
 
 </div>
+<script>
+  const tabBar = document.querySelector('.tabs')
+  M.Tabs.init(tabBar, {});
+</script>
