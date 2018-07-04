@@ -8,6 +8,6 @@ describe 'user visits user show' do
     visit user_path(user)
 
     expect(page).to have_content("Welcome #{user.username}")
-    # Needs repos
+    # Needs repos test
   end
 end

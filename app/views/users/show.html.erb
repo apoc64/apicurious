@@ -1,10 +1,39 @@
-<h3>Welcome <%= current_user.username %></h3>
+<div class="profile">
+  <div class="profile-pic">
+    <img src="<%= @profile["avatar_url"] %>" alt="">
+  </div>
+  <div class="profile-bio">
+    <h5><%= @profile["name"] %></h5>
+    <h6><%= @profile["login"] %></h6>
+    <p><%= @profile["bio"] %></p>
+  </div>
+  <div class="profile-bio2">
+    <a href="#" class="btn">Edit bio</a>
+    <p><%= @profile["location"] %></p>
+    <a href="mailto:<%= @profile["email"] %>"><%= @profile["email"] %></a>
+  </div>
+  <div class="profile-tabs">
+    <a href="#">Overview</a>
+    <a href="#">Repositories <%= @repos.count %></a>
+    <a href="#">Stars</a>
+    <a href="#">Followers</a>
+    <a href="#">Following</a>
+  </div>
+  <div class="profile-repos-title">
+    <p>Pinned repositories</p>
+  </div>
+  <div class="profile-repos-customize">
+    <p><a href="#">Customize your pinned repositories</a></p>
+  </div>
 
-<% if @repos && @repos["message"] != "Bad credentials" %>
-<ul>
-  <% # binding.pry %>
-<% @repos.each do |repo| %>
-  <li><%= repo["name"] %></li>
-<% end %>
-</ul>
-<% end %>
+  <% @repos[0..5].each do |repo| %>
+    <div class="profile-repo">
+      <div class="card-panel">
+        <h6 class="blue-text"><strong><%= repo["name"] %></strong></h6>
+        <p><%= truncate(repo["description"], length: 80) %></p>
+        <p><%= repo["language"] %></p>
+      </div>
+    </div>
+  <% end %>
+
+</div>
