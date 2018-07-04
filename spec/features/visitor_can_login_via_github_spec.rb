@@ -7,6 +7,7 @@ describe 'visitor visits root' do
   end
 
   it 'can fail to login' do
+    puts "Should display login failure message in console:"
     visit '/auth/github/callback'
 
     expect(current_path).to eq('/')
@@ -18,18 +19,5 @@ describe 'visitor visits root' do
     click_link "Login with Github"
 
     expect(page).to have_content("Welcome apoc64")
-  end
-
-  def stub_omniauth
-    OmniAuth.config.test_mode = true
-    OmniAuth.config.mock_auth[:github] = OmniAuth::AuthHash.new({
-      provider: 'github',
-      info: {
-        nickname: 'apoc64'
-      },
-      credentials: {
-        token: Rails.application.credentials.github[:test_token]
-      }
-    })
   end
 end

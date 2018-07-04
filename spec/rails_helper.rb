@@ -13,6 +13,7 @@ RSpec.configure do |config|
   config.infer_spec_type_from_file_location!
 
   config.filter_rails_from_backtrace!
+  config.include FactoryBot::Syntax::Methods
 end
 
 Shoulda::Matchers.configure do |config|
@@ -21,3 +22,17 @@ Shoulda::Matchers.configure do |config|
     with.library :rails
   end
 end
+
+
+def stub_omniauth
+  OmniAuth.config.test_mode = true
+  OmniAuth.config.mock_auth[:github] = OmniAuth::AuthHash.new({
+    provider: 'github',
+    info: {
+      nickname: 'apoc64'
+    },
+    credentials: {
+      token: Rails.application.credentials.github[:test_token]
+    }
+    })
+  end
