@@ -15,10 +15,10 @@
   <div class="profile-tabs row">
     <ul class="tabs">
       <li class="tab col s2" id="overview"><a href="#" class="active black-text" id=-"overview">Overview</a></li>
-      <li class="tab col s3" id="repos"><a href="#" class="black-text">Repositories <strong class="grey lighten-2"><%= @repos.count %></strong></a></li>
+      <li class="tab col s3" id="repos"><a href="#" class="black-text">Repositories <strong class="grey lighten-2"><%= @profile["public_repos"] %></strong></a></li>
       <li class="tab col s2" id="stars"><a href="#" class="black-text">Stars</a></li>
-      <li class="tab col s2" id="followers"><a href="#" class="black-text">Followers</a></li>
-      <li class="tab col s2" id="following"><a href="#" class="black-text">Following</a></li>
+      <li class="tab col s2" id="followers"><a href="#" class="black-text">Followers <strong class="grey lighten-2"><%= @profile["followers"] %></strong></a></li>
+      <li class="tab col s2" id="following"><a href="#" class="black-text">Following <strong class="grey lighten-2"><%= @profile["following"] %></strong></a></li>
     </ul>
   </div>
   <div class="profile-repos-title main-display overview">

@@ -32,9 +32,11 @@
   grid-row: 1/2;
   width: 100%;
 }
-.profile-tabs .tab {
+.profile-tabs .tab a {
   text-overflow: clip;
   text-transform: none;
+  padding: 0;
+  margin: 0;
 }
 .profile-tabs .tab strong {
   padding: 2px;
