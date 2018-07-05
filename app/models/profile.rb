@@ -7,7 +7,8 @@ class Profile
               :email,
               :public_repos,
               :followers,
-              :following
+              :following,
+              :starred_url
 
   def initialize(attributes)
     @avatar = attributes[:avatar_url]
@@ -19,6 +20,7 @@ class Profile
     @public_repos = attributes[:public_repos]
     @followers = attributes[:followers]
     @following = attributes[:following]
+    # binding.pry
+    @starred_url = attributes[:starred_url]
   end
-
 end

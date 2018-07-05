@@ -21,8 +21,3 @@ class Github
     JSON.parse(json, symbolize_names: true)
   end
 end
-# user = current_user
-# user_response = Faraday.get("https://api.github.com/users/#{user.username}?access_token=#{user.oauthtoken}")
-# @profile = JSON.parse(user_response.body)
-# repo_response = Faraday.get("https://api.github.com/users/#{user.username}/repos?access_token=#{user.oauthtoken}")
-# @repos = JSON.parse(repo_response.body)

@@ -28,9 +28,6 @@
     <p><a href="#" class="black-text">Customize your pinned repositories</a></p>
   </div>
 
-  <!-- for testing oauth - doesn't work ???
-   if (@repos && !(@repos["message"] == "Bad credentials")) -->
-
   <% @repos[0..5].each do |repo| %>
     <div class="profile-repo main-display overview">
       <div class="card-panel">
@@ -42,14 +39,19 @@
   <% end %>
 
 <!-- hidden fields -->
-  <div class="repo-index main-display">
+  <div class="repo-index main-display ">
     <ul>
     <% @repos.each do |repo| %>
       <li><%= repo[:name] %></li>
     <% end %>
     </ul>
   </div>
-  <!-- end oauth test if -->
+
+  <div class="followers-index main-display">
+  </div>
+
+  <div class="following-index main-display">
+  </div>
 
 </div>
 <!-- end of grid -->
@@ -58,11 +60,39 @@
   const tabBar = document.querySelector('.tabs')
   M.Tabs.init(tabBar, {});
 
+  function followerTabPress() {
+    console.log("follower")
+    const followerIndex = document.querySelector('.followers-index')
+    starData = fetch("https://api.github.com/users/<%= @profile.login %>/followers")
+    .then(response => response.json())
+      .then(function(response) {
+        response.forEach( follower => {
+          var newDiv = document.createElement('div')
+          followerIndex.appendChild(newDiv)
+          newDiv.innerHTML = `<a href="/users/${follower["login"]}">${follower["login"]}</a>`
+        })
+        followerIndex.style.display = 'block'
+      })
+  }
+
+  function followingTabPress() {
+    const followingIndex = document.querySelector('.following-index')
+    starData = fetch("https://api.github.com/users/<%= @profile.login %>/following")
+    .then(response => response.json())
+      .then(function(response) {
+        console.log(response)
+        response.forEach( followed => {
+          var newDiv = document.createElement('div')
+          followingIndex.appendChild(newDiv)
+          newDiv.innerHTML = `<a href="/users/${followed["login"]}">${followed["login"]}</a>`
+        })
+        followingIndex.style.display = 'block'
+      })
+  }
 
   const tabs = document.querySelectorAll('.tab')
   tabs.forEach(tab => {
     tab.addEventListener('click', function() {
-
       // if not active?
       var repos = document.querySelectorAll('.main-display')
       repos.forEach(repo => {
@@ -79,11 +109,15 @@
           const repoIndex = document.querySelector('.repo-index')
           repoIndex.style.display = 'block'
           break;
+        case 'followers':
+          followerTabPress()
+          break;
+        case 'following':
+          followingTabPress()
+          break;
         default:
           console.log("default tab");
       }
     })
   })
-
-
 </script>

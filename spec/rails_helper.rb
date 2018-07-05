@@ -34,5 +34,5 @@ def stub_omniauth
     credentials: {
       token: Rails.application.credentials.github[:test_token]
     }
-    })
-  end
+  })
+end
