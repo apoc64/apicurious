@@ -28,6 +28,9 @@
     <p><a href="#" class="black-text">Customize your pinned repositories</a></p>
   </div>
 
+  <!-- for testing oauth - doesn't work ???
+   if (@repos && !(@repos["message"] == "Bad credentials")) -->
+
   <% @repos[0..5].each do |repo| %>
     <div class="profile-repo main-display overview">
       <div class="card-panel">
@@ -46,6 +49,7 @@
     <% end %>
     </ul>
   </div>
+  <!-- end oauth test if -->
 
 </div>
 <!-- end of grid -->
@@ -58,7 +62,7 @@
   const tabs = document.querySelectorAll('.tab')
   tabs.forEach(tab => {
     tab.addEventListener('click', function() {
-      // console.log(this.id);
+      
       // if not active?
       var repos = document.querySelectorAll('.main-display')
       repos.forEach(repo => {
