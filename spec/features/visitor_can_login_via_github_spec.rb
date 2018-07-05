@@ -13,12 +13,10 @@ describe 'visitor visits root' do
     expect(current_path).to eq('/')
   end
 
-  xit 'can login with github' do
+  it 'can login with github' do
     WebMock.allow_net_connect!
     stub_omniauth
     visit '/'
-
-    # responses for Faraday??? - fails on @repos
 
     click_link "Login with Github"
 

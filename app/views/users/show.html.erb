@@ -1,24 +1,24 @@
 <div class="profile">
   <div class="profile-pic">
-    <img src="<%= @profile["avatar_url"] %>" alt="">
+    <img src="<%= @profile.avatar %>" alt="">
   </div>
   <div class="profile-bio">
-    <h5><%= @profile["name"] %></h5>
-    <h6><%= @profile["login"] %></h6>
-    <p><%= @profile["bio"] %></p>
+    <h5><%= @profile.name %></h5>
+    <h6><%= @profile.login %></h6>
+    <p><%= @profile.bio %></p>
   </div>
   <div class="profile-bio2">
     <a href="#" class="btn grey lighten-3 black-text">Edit bio</a>
-    <p><%= @profile["location"] %></p>
-    <a href="mailto:<%= @profile["email"] %>"><%= @profile["email"] %></a>
+    <p><%= @profile.location %></p>
+    <a href="mailto:<%= @profile.email %>"><%= @profile.email %></a>
   </div>
   <div class="profile-tabs row">
     <ul class="tabs">
       <li class="tab col s2" id="overview"><a href="#" class="active black-text" id=-"overview">Overview</a></li>
-      <li class="tab col s3" id="repos"><a href="#" class="black-text">Repositories <strong class="grey lighten-2"><%= @profile["public_repos"] %></strong></a></li>
+      <li class="tab col s3" id="repos"><a href="#" class="black-text">Repositories <strong class="grey lighten-2"><%= @profile.public_repos %></strong></a></li>
       <li class="tab col s2" id="stars"><a href="#" class="black-text">Stars</a></li>
-      <li class="tab col s2" id="followers"><a href="#" class="black-text">Followers <strong class="grey lighten-2"><%= @profile["followers"] %></strong></a></li>
-      <li class="tab col s2" id="following"><a href="#" class="black-text">Following <strong class="grey lighten-2"><%= @profile["following"] %></strong></a></li>
+      <li class="tab col s2" id="followers"><a href="#" class="black-text">Followers <strong class="grey lighten-2"><%= @profile.followers %></strong></a></li>
+      <li class="tab col s2" id="following"><a href="#" class="black-text">Following <strong class="grey lighten-2"><%= @profile.following %></strong></a></li>
     </ul>
   </div>
   <div class="profile-repos-title main-display overview">
@@ -62,7 +62,7 @@
   const tabs = document.querySelectorAll('.tab')
   tabs.forEach(tab => {
     tab.addEventListener('click', function() {
-      
+
       // if not active?
       var repos = document.querySelectorAll('.main-display')
       repos.forEach(repo => {
