@@ -34,9 +34,9 @@
   <% @repos[0..5].each do |repo| %>
     <div class="profile-repo main-display overview">
       <div class="card-panel">
-        <h6 class="blue-text"><strong><%= repo["name"] %></strong></h6>
-        <p><%= truncate(repo["description"], length: 80) %></p>
-        <p><%= repo["language"] %></p>
+        <h6 class="blue-text"><strong><%= repo[:name] %></strong></h6>
+        <p><%= truncate(repo[:description], length: 80) %></p>
+        <p><%= repo[:language] %></p>
       </div>
     </div>
   <% end %>
@@ -45,7 +45,7 @@
   <div class="repo-index main-display">
     <ul>
     <% @repos.each do |repo| %>
-      <li><%= repo["name"] %></li>
+      <li><%= repo[:name] %></li>
     <% end %>
     </ul>
   </div>

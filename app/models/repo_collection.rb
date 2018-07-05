@@ -1,5 +1,7 @@
 class RepoCollection
-  def initialize(attributes)
-  end
+  attr_reader :repositories
 
+  def initialize(attributes)
+    @repositories = attributes
+  end
 end
