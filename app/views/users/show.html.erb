@@ -40,6 +40,16 @@
 
 <!-- hidden fields -->
   <div class="repo-index main-display ">
+    <% if @is_current %>
+    <h6>Create New Repository:</h6>
+    <div class="input-field">
+      <input type="text" id="new-repo-name">
+      <label for="new-repo-name">Repository Name</label>
+    </div>
+    <input type="submit" value="Create" class="btn" id="new-repo-submit">
+    <% end %>
+
+    <h6>Current Repositories:</h6>
     <ul>
     <% @repos.each do |repo| %>
       <li><%= repo[:name] %></li>
@@ -63,7 +73,7 @@
   function followerTabPress() {
     console.log("follower")
     const followerIndex = document.querySelector('.followers-index')
-    starData = fetch("https://api.github.com/users/<%= @profile.login %>/followers")
+    starData = fetch("https://api.github.com/users/<%= @profile.login %>/followers?access_token=<%= current_user.oauthtoken %>")
     .then(response => response.json())
       .then(function(response) {
         response.forEach( follower => {
@@ -77,7 +87,7 @@
 
   function followingTabPress() {
     const followingIndex = document.querySelector('.following-index')
-    starData = fetch("https://api.github.com/users/<%= @profile.login %>/following")
+    starData = fetch("https://api.github.com/users/<%= @profile.login %>/following?access_token=<%= current_user.oauthtoken %>")
     .then(response => response.json())
       .then(function(response) {
         console.log(response)
@@ -119,5 +129,25 @@
           console.log("default tab");
       }
     })
+  })
+
+  const newRepo = document.querySelector('#new-repo-submit')
+  const newRepoName = document.querySelector('#new-repo-name')
+  newRepo.addEventListener('click', function() {
+    name = newRepoName.value
+
+    $.ajax({
+      url: 'https://api.github.com/user/repos',
+      type: 'POST',
+      beforeSend: function(xhr) {
+        xhr.setRequestHeader("authorization", "token <%= current_user.oauthtoken %>");
+      },
+      data: `{ "name": ${name} }`
+    }).done(function(reponse) {
+      consolelog(response)
+    })
+    // var xhttp = new XMLHttpRequest()
+    // xhttp.open("POST", `https://api.github.com/user/repos?access_token=<%= current_user.oauthtoken %>`, true)
+    // xhttp.send(`name=${name}`)
   })
 </script>

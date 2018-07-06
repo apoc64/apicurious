@@ -12,6 +12,5 @@ class UsersController < ApplicationController
     end
     @profile = gh.profile(name)
     @repos = gh.repositories(name).repositories
-    # binding.pry
   end
 end
