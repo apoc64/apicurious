@@ -8,7 +8,9 @@
     <p><%= @profile.bio %></p>
   </div>
   <div class="profile-bio2">
+    <% if @is_current %>
     <a href="#" class="btn grey lighten-3 black-text">Edit bio</a>
+    <% end %>
     <p><%= @profile.location %></p>
     <a href="mailto:<%= @profile.email %>"><%= @profile.email %></a>
   </div>
@@ -71,7 +73,6 @@
   M.Tabs.init(tabBar, {});
 
   function followerTabPress() {
-    console.log("follower")
     const followerIndex = document.querySelector('.followers-index')
     starData = fetch("https://api.github.com/users/<%= @profile.login %>/followers?access_token=<%= current_user.oauthtoken %>")
     .then(response => response.json())
