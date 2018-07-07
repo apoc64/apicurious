@@ -10,7 +10,7 @@ class Github
 
   def repositories(name)
     repos_data = parse(get("users/#{name}/repos"))
-    RepoCollection.new(repos_data)
+    RepoCollection.new(repos_data)  
   end
 
   def get(resource)

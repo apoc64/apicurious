@@ -1,26 +1,26 @@
 <div class="profile">
   <div class="profile-pic">
-    <img src="<%= @profile.avatar %>" alt="">
+    <img src="<%= @presenter.profile.avatar %>" alt="">
   </div>
   <div class="profile-bio">
-    <h5><%= @profile.name %></h5>
-    <h6><%= @profile.login %></h6>
-    <p><%= @profile.bio %></p>
+    <h5><%= @presenter.profile.name %></h5>
+    <h6><%= @presenter.profile.login %></h6>
+    <p><%= @presenter.profile.bio %></p>
   </div>
   <div class="profile-bio2">
-    <% if @is_current %>
+    <% if @presenter.is_current %>
     <a href="#" class="btn grey lighten-3 black-text">Edit bio</a>
     <% end %>
-    <p><%= @profile.location %></p>
-    <a href="mailto:<%= @profile.email %>"><%= @profile.email %></a>
+    <p><%= @presenter.profile.location %></p>
+    <a href="mailto:<%= @presenter.profile.email %>"><%= @presenter.profile.email %></a>
   </div>
   <div class="profile-tabs row">
     <ul class="tabs">
       <li class="tab col s2" id="overview"><a href="#" class="active black-text" id=-"overview">Overview</a></li>
-      <li class="tab col s3" id="repos"><a href="#" class="black-text">Repositories <strong class="grey lighten-2"><%= @profile.public_repos %></strong></a></li>
+      <li class="tab col s3" id="repos"><a href="#" class="black-text">Repositories <strong class="grey lighten-2"><%= @presenter.profile.public_repos %></strong></a></li>
       <li class="tab col s2" id="stars"><a href="#" class="black-text">Stars</a></li>
-      <li class="tab col s2" id="followers"><a href="#" class="black-text">Followers <strong class="grey lighten-2"><%= @profile.followers %></strong></a></li>
-      <li class="tab col s2" id="following"><a href="#" class="black-text">Following <strong class="grey lighten-2"><%= @profile.following %></strong></a></li>
+      <li class="tab col s2" id="followers"><a href="#" class="black-text">Followers <strong class="grey lighten-2"><%= @presenter.profile.followers %></strong></a></li>
+      <li class="tab col s2" id="following"><a href="#" class="black-text">Following <strong class="grey lighten-2"><%= @presenter.profile.following %></strong></a></li>
     </ul>
   </div>
   <div class="profile-repos-title main-display overview">
@@ -30,19 +30,19 @@
     <p><a href="#" class="black-text">Customize your pinned repositories</a></p>
   </div>
 
-  <% @repos[0..5].each do |repo| %>
+  <% @presenter.repos[0..5].each do |repo| %>
     <div class="profile-repo main-display overview">
       <div class="card-panel">
-        <h6 class="blue-text"><strong><%= repo[:name] %></strong></h6>
-        <p><%= truncate(repo[:description], length: 80) %></p>
-        <p><%= repo[:language] %></p>
+        <h6 class="blue-text"><strong><%= repo.name %></strong></h6>
+        <p><%= truncate(repo.description, length: 80) %></p>
+        <p><%= repo.language %></p>
       </div>
     </div>
   <% end %>
 
 <!-- hidden fields -->
   <div class="repo-index main-display ">
-    <% if @is_current %>
+    <% if @presenter.is_current %>
     <h6>Create New Repository:</h6>
     <div class="input-field">
       <input type="text" id="new-repo-name">
@@ -53,8 +53,8 @@
 
     <h6>Current Repositories:</h6>
     <ul>
-    <% @repos.each do |repo| %>
-      <li><%= repo[:name] %></li>
+    <% @presenter.repos.each do |repo| %>
+      <li><%= repo.name %></li>
     <% end %>
     </ul>
   </div>
@@ -74,7 +74,7 @@
 
   function followerTabPress() {
     const followerIndex = document.querySelector('.followers-index')
-    starData = fetch("https://api.github.com/users/<%= @profile.login %>/followers?access_token=<%= current_user.oauthtoken %>")
+    starData = fetch("https://api.github.com/users/<%= @presenter.profile.login %>/followers?access_token=<%= @presenter.token %>")
     .then(response => response.json())
       .then(function(response) {
         response.forEach( follower => {
@@ -88,7 +88,7 @@
 
   function followingTabPress() {
     const followingIndex = document.querySelector('.following-index')
-    starData = fetch("https://api.github.com/users/<%= @profile.login %>/following?access_token=<%= current_user.oauthtoken %>")
+    starData = fetch("https://api.github.com/users/<%= @presenter.profile.login %>/following?access_token=<%= @presenter.token %>")
     .then(response => response.json())
       .then(function(response) {
         console.log(response)
@@ -136,19 +136,18 @@
   const newRepoName = document.querySelector('#new-repo-name')
   newRepo.addEventListener('click', function() {
     name = newRepoName.value
-
-    $.ajax({
-      url: 'https://api.github.com/user/repos',
-      type: 'POST',
-      beforeSend: function(xhr) {
-        xhr.setRequestHeader("authorization", "token <%= current_user.oauthtoken %>");
-      },
-      data: `{ "name": ${name} }`
-    }).done(function(reponse) {
-      consolelog(response)
-    })
+    // $.ajax({
+    //   url: 'https://api.github.com/user/repos',
+    //   type: 'POST',
+    //   beforeSend: function(xhr) {
+    //     xhr.setRequestHeader("authorization", "token <%= @presenter.token %>");
+    //   },
+    //   data: `{ "name": ${name} }`
+    // }).done(function(reponse) {
+    //   consolelog(response)
+    // })
     // var xhttp = new XMLHttpRequest()
-    // xhttp.open("POST", `https://api.github.com/user/repos?access_token=<%= current_user.oauthtoken %>`, true)
+    // xhttp.open("POST", `https://api.github.com/user/repos?access_token=<%= @presenter.token %>`, true)
     // xhttp.send(`name=${name}`)
   })
 </script>

@@ -2,7 +2,7 @@
   margin-top: 30px;
   display: grid;
   grid-template-columns: 25% 37% 37%;
-  grid-template-rows: 60px 30px 170px 170px 170px 300px;
+  grid-template-rows: 60px 30px 170px 170px 170px 350px;
 }
 
 .profile-pic {
