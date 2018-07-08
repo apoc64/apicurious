@@ -43,16 +43,7 @@
 
 <!-- hidden fields -->
   <div class="repo-index main-display ">
-    <% if @presenter.is_current %>
-    <h6>Create New Repository:</h6>
-    <div class="input-field">
-      <input type="text" id="new-repo-name">
-      <label for="new-repo-name">Repository Name</label>
-    </div>
-    <input type="submit" value="Create" class="btn" id="new-repo-submit">
-    <% end %>
-
-    <h6>Current Repositories:</h6>
+    <h6>User Repositories:</h6>
     <ul>
     <% @presenter.repos.each do |repo| %>
       <li><%= repo.name %></li>
@@ -70,85 +61,7 @@
 <!-- end of grid -->
 
 <script>
-  const tabBar = document.querySelector('.tabs')
-  M.Tabs.init(tabBar, {});
-
-  function followerTabPress() {
-    const followerIndex = document.querySelector('.followers-index')
-    starData = fetch("https://api.github.com/users/<%= @presenter.profile.login %>/followers?access_token=<%= @presenter.token %>")
-    .then(response => response.json())
-      .then(function(response) {
-        response.forEach( follower => {
-          var newDiv = document.createElement('div')
-          followerIndex.appendChild(newDiv)
-          newDiv.innerHTML = `<a href="/users/${follower["login"]}">${follower["login"]}</a>`
-        })
-        followerIndex.style.display = 'block'
-      })
-  }
-
-  function followingTabPress() {
-    const followingIndex = document.querySelector('.following-index')
-    starData = fetch("https://api.github.com/users/<%= @presenter.profile.login %>/following?access_token=<%= @presenter.token %>")
-    .then(response => response.json())
-      .then(function(response) {
-        console.log(response)
-        response.forEach( followed => {
-          var newDiv = document.createElement('div')
-          followingIndex.appendChild(newDiv)
-          newDiv.innerHTML = `<a href="/users/${followed["login"]}">${followed["login"]}</a>`
-        })
-        followingIndex.style.display = 'block'
-      })
-  }
-
-  const tabs = document.querySelectorAll('.tab')
-  tabs.forEach(tab => {
-    tab.addEventListener('click', function() {
-      // if not active?
-      var repos = document.querySelectorAll('.main-display')
-      repos.forEach(repo => {
-        repo.style.display = 'none'
-      })
-      switch (this.id) {
-        case 'overview':
-          const overs = document.querySelectorAll('.overview')
-          overs.forEach(over => {
-            over.style.display = 'inherit'
-          })
-          break;
-        case 'repos':
-          const repoIndex = document.querySelector('.repo-index')
-          repoIndex.style.display = 'block'
-          break;
-        case 'followers':
-          followerTabPress()
-          break;
-        case 'following':
-          followingTabPress()
-          break;
-        default:
-          console.log("default tab");
-      }
-    })
-  })
-
-  const newRepo = document.querySelector('#new-repo-submit')
-  const newRepoName = document.querySelector('#new-repo-name')
-  newRepo.addEventListener('click', function() {
-    name = newRepoName.value
-    // $.ajax({
-    //   url: 'https://api.github.com/user/repos',
-    //   type: 'POST',
-    //   beforeSend: function(xhr) {
-    //     xhr.setRequestHeader("authorization", "token <%= @presenter.token %>");
-    //   },
-    //   data: `{ "name": ${name} }`
-    // }).done(function(reponse) {
-    //   consolelog(response)
-    // })
-    // var xhttp = new XMLHttpRequest()
-    // xhttp.open("POST", `https://api.github.com/user/repos?access_token=<%= @presenter.token %>`, true)
-    // xhttp.send(`name=${name}`)
-  })
+  const login = "<%= @presenter.profile.login %>"
+  const token = "<%= @presenter.token %>"
 </script>
+<%= javascript_include_tag 'profile_show.js' %>
