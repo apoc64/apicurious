@@ -10,8 +10,11 @@ This app uses:
 
 ## Setup
 After cloning this project, run
+
 ```bundle install```
+
 ```rake db:create```
+
 ```rake db:migrate```
 
 ### Setting up API keys
@@ -29,6 +32,7 @@ github:
 
 ## Running the app
 To run the app locally, run
+
 ```rails s```
 
 Then visit localhost:3000 in your browser. This will allow you to sign up or login with GitHub.
