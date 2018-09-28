@@ -1,24 +1,39 @@
-# README
+# API Curious
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This Rails app is a GitHub emulator using GitHub OAuth and their API. OAuth and user profiles are through Rails views, with additional data loaded through JavaScript fetch calls.
 
-Things you may want to cover:
+## Ruby version
+This app uses:
 
-* Ruby version
+* Ruby 2.4.2
+* Rails 5.2
 
-* System dependencies
+## Setup
+After cloning this project, run
+```bundle install```
+```rake db:create```
+```rake db:migrate```
 
-* Configuration
+### Setting up API keys
+This app requires a GitHub API key using Rails 5.2 credentials. To add them to the Rails project, you must edit the encrypted file credentials.yml.enc which uses master.key to decrypt. To edit the credentials file in Atom, run
 
-* Database creation
+```EDITOR="atom --wait" rails credentials:edit```
 
-* Database initialization
+or change appropriately depending on your text editor. In the credentials file enter the client_id, client_secret. The tests use a user token as well.
+```
+github:
+  client_id: XXXXXXX
+  client_secret: XXXXXXXXXXXXXXXXXXXXXX
+  test_token:  XXXXXXXXXXXXXXXXXXXX
+```
 
-* How to run the test suite
+## Running the app
+To run the app locally, run
+```rails s```
 
-* Services (job queues, cache servers, search engines, etc.)
+Then visit localhost:3000 in your browser. This will allow you to sign up or login with GitHub.
 
-* Deployment instructions
+## Testing
+To run the test suite, run
 
-* ...
+```rspec```
