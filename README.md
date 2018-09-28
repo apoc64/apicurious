@@ -11,11 +11,11 @@ This app uses:
 ## Setup
 After cloning this project, run
 
-```bundle install```
-
-```rake db:create```
-
-```rake db:migrate```
+```
+bundle install
+rake db:create
+rake db:migrate
+```
 
 ### Setting up API keys
 This app requires a GitHub API key using Rails 5.2 credentials. To add them to the Rails project, you must edit the encrypted file credentials.yml.enc which uses master.key to decrypt. To edit the credentials file in Atom, run
