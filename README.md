@@ -1,6 +1,6 @@
 # API Curious
 
-This Rails app is a GitHub emulator using GitHub OAuth and their API. OAuth and user profiles are through Rails views, with additional data loaded through JavaScript fetch calls.
+This Rails app is a GitHub emulator using GitHub OAuth and their API. OAuth and user profiles are through Rails views, with additional data loaded through JavaScript fetch calls. The deployed site is here: https://api-curious-steve.herokuapp.com/
 
 ## Ruby version
 This app uses:
